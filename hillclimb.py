@@ -7,7 +7,6 @@ letters = [i for i in ascii_lowercase]
 def score_string(word, real_word):
 	return sum(x == y for x, y in zip(word, real_word))	
 
-
 def mutate_string(word, real_word):
 	if len(word) != len(real_word):
 		print('unequal string lengths not allowed')
@@ -42,6 +41,7 @@ def mutate_string(word, real_word):
 		counter += 1	
 
 	return word, counter
+
 
 target = input('target string: ')
 start = input("start string ('!!!' to start with a random string): ")
