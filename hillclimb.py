@@ -27,7 +27,10 @@ def mutate_string(word, real_word):
 			if x != y:
 				index = word.index(x)
 				a = random.choice(letters)
-				word[index] = a
+				temp_word = word
+				temp_word[index] = a
+				if score_string(temp_word, real_word) > max_score:
+					word[index] = a
 
 		score = score_string(word, real_word)
 		if score == len(real_word):
@@ -36,18 +39,18 @@ def mutate_string(word, real_word):
 			max_score = score
 			max_generated = word
 
-		if counter % 100 == 0:
-			print('best match = {}, at {} iterations'.format(''.join(i for i in max_generated), counter))
+		print('at iteration {}, best match = {}'.format(counter, ''.join(i for i in max_generated)))
 		counter += 1	
 
 	return word, counter
 
 
 target = input('target string: ')
-start = input("start string ('!!!' to start with a random string): ")
-if start == '!!!':
+print('target string length = {}'.format(len(target)))
+start = input("start string: ")
+if start == '':
+	print('starting with a random string')
 	start = ''.join([random.choice(letters) for i in range(len(target))])
 result, counter = mutate_string(start, target)
 print('string found ! -> {} , counter = {}'.format(''.join(i for i in result), counter))
-
 
